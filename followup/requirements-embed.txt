@@ -1,0 +1,5 @@
+# SapBERT label embeddings (followup/kg/embed_labels.py). Used with Python 3.14.
+sentence-transformers==3.3.1
+transformers==4.57.6
+torch==2.14.1
+numpy==2.5.4

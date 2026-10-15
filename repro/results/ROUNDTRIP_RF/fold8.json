@@ -1,0 +1,1 @@
+{"run": "ROUNDTRIP_RF", "fold": 8, "best_epoch": 0, "acc": 0.788, "auc_weighted": 0.9188543031868158, "f1_backhome": 0.8357541899441341, "f1_rehab": 0.7579908675799086, "f1_death": 0.7161572052401747, "f1_macro": 0.7699674209214057, "f1_weighted": 0.7873304085794977, "pred_class_counts": [451, 444, 105]}

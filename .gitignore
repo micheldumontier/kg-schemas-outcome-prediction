@@ -1,0 +1,15 @@
+# third-party clone and local data
+neurovasc/
+ontologies/sphn/
+ontologies/omop/
+# environments and caches
+.venv/
+__pycache__/
+.pytest_cache/
+# generated graphs, processed inputs and logs
+repro/graphs/
+repro/processed/
+repro/sphn_run/
+repro/data_9a3f.csv
+repro/logs/
+repro/logs_gen_*.txt

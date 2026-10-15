@@ -1,0 +1,10 @@
+# Python 3.11. Synthetic reproduction and every graph run (also used on the GPU machine for MIMIC-IV graphs).
+torch==2.4.1
+torch-geometric==2.6.1
+rdflib==7.0.0
+pandas==2.2.2
+numpy==1.26.4
+scikit-learn==1.5.1
+scipy==1.17.1
+joblib==1.4.2
+pytest

@@ -1,0 +1,1 @@
+{"run": "MIMIC48_sphn_tsr", "fold": 7, "best_epoch": 1116, "acc": 0.671875, "auc_weighted": 0.8211427758097167, "f1_backhome": 0.8035714285714286, "f1_rehab": 0.6153846153846154, "f1_death": 0.45, "f1_macro": 0.622985347985348, "f1_weighted": 0.6608258928571428}

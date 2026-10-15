@@ -1,0 +1,67 @@
+{
+ "args": {
+  "prefix": "processed/sphn_ts",
+  "outcomes": "processed/sphn_outcomes.joblib",
+  "num_patients": 10000,
+  "layers": 3,
+  "folds": 10,
+  "run_folds": 1,
+  "epochs": 1000,
+  "dr": 0.2,
+  "lr": 0.001,
+  "wd": 0.0005,
+  "embed_dim": 32,
+  "hidden_dim": 32,
+  "device": "cpu",
+  "seed": 0,
+  "out": "results/S_sphn_ts_L3.json"
+ },
+ "folds": [
+  {
+   "fold": 0,
+   "best_epoch": 854,
+   "acc": 0.792,
+   "auc_weighted": 0.917561173547569,
+   "f1_backhome": 0.85456595264938,
+   "f1_rehab": 0.7662921348314606,
+   "f1_death": 0.6457399103139013,
+   "f1_macro": 0.7555326659315806,
+   "f1_weighted": 0.7903284080601041,
+   "pred_class_counts": [
+    444,
+    458,
+    98
+   ]
+  }
+ ],
+ "summary": {
+  "acc": [
+   0.792,
+   0.0
+  ],
+  "auc_weighted": [
+   0.917561173547569,
+   0.0
+  ],
+  "f1_backhome": [
+   0.85456595264938,
+   0.0
+  ],
+  "f1_rehab": [
+   0.7662921348314606,
+   0.0
+  ],
+  "f1_death": [
+   0.6457399103139013,
+   0.0
+  ],
+  "f1_macro": [
+   0.7555326659315806,
+   0.0
+  ],
+  "f1_weighted": [
+   0.7903284080601041,
+   0.0
+  ]
+ }
+}

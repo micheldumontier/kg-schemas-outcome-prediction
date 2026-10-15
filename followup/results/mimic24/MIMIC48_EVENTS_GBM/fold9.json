@@ -1,0 +1,1 @@
+{"run": "MIMIC48_EVENTS_GBM", "fold": 9, "best_epoch": 0, "acc": 0.5, "auc_weighted": 0.6682692307692308, "f1_backhome": 0.5773195876288659, "f1_rehab": 0.5, "f1_death": 0.2857142857142857, "f1_macro": 0.4543446244477172, "f1_weighted": 0.4912325110456553}

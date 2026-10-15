@@ -1,0 +1,1 @@
+{"run": "MIMIC24s1_arm_sapbert", "fold": 1, "best_epoch": 741, "acc": 0.6834532374100719, "auc_weighted": 0.834823688292317, "f1_backhome": 0.8035714285714286, "f1_rehab": 0.6037735849056604, "f1_death": 0.6, "f1_macro": 0.669115004492363, "f1_weighted": 0.6834532374100719}

@@ -1,0 +1,1 @@
+{"run": "G", "fold": 1, "best_epoch": 1363, "acc": 0.7, "auc_weighted": 0.7775020840103457, "f1_backhome": 0.7815230961298377, "f1_rehab": 0.7220149253731343, "f1_death": 0.0, "f1_macro": 0.5011793405009907, "f1_weighted": 0.6581251793467121, "pred_class_counts": [358, 640, 2]}

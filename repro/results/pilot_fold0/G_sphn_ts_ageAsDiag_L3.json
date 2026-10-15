@@ -1,0 +1,68 @@
+{
+ "args": {
+  "prefix": "processed/sphn_ts_ageAsDiag",
+  "outcomes": "processed/sphn_outcomes.joblib",
+  "num_patients": 10000,
+  "layers": 3,
+  "folds": 10,
+  "run_folds": 1,
+  "epochs": 600,
+  "dr": 0.2,
+  "lr": 0.001,
+  "wd": 0.0005,
+  "embed_dim": 32,
+  "hidden_dim": 32,
+  "device": "cpu",
+  "seed": 0,
+  "emb_std": null,
+  "out": "results/G_sphn_ts_ageAsDiag_L3.json"
+ },
+ "folds": [
+  {
+   "fold": 0,
+   "best_epoch": 599,
+   "acc": 0.57,
+   "auc_weighted": 0.6776820943000914,
+   "f1_backhome": 0.6251441753171857,
+   "f1_rehab": 0.5932539682539683,
+   "f1_death": 0.0,
+   "f1_macro": 0.40613271452371796,
+   "f1_weighted": 0.5332245839512275,
+   "pred_class_counts": [
+    424,
+    576,
+    0
+   ]
+  }
+ ],
+ "summary": {
+  "acc": [
+   0.57,
+   0.0
+  ],
+  "auc_weighted": [
+   0.6776820943000914,
+   0.0
+  ],
+  "f1_backhome": [
+   0.6251441753171857,
+   0.0
+  ],
+  "f1_rehab": [
+   0.5932539682539683,
+   0.0
+  ],
+  "f1_death": [
+   0.0,
+   0.0
+  ],
+  "f1_macro": [
+   0.40613271452371796,
+   0.0
+  ],
+  "f1_weighted": [
+   0.5332245839512275,
+   0.0
+  ]
+ }
+}

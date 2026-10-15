@@ -1,0 +1,4 @@
+# OWL2Vec* embeddings (followup/kg/owl2vec_embed.py). OWL2Vec* 0.2.0 needs Python 3.7 or 3.8 and Java for owlready2.
+# Resolved with: gensim 3.8.3, nltk 3.9.1 (run nltk.download('punkt_tab')), rdflib 4.2.2, numpy 1.24.4.
+owl2vec-star==0.2.0
+owlready2==0.45

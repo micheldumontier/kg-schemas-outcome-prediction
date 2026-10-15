@@ -1,0 +1,1 @@
+{"run": "MIMIC24_AGE_GBM", "fold": 0, "best_epoch": 0, "acc": 0.4892086330935252, "auc_weighted": 0.6232905182995893, "f1_backhome": 0.608, "f1_rehab": 0.5128205128205128, "f1_death": 0.0, "f1_macro": 0.3736068376068376, "f1_weighted": 0.4404855192768862}

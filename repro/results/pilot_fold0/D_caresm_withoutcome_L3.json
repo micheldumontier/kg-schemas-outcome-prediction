@@ -1,0 +1,68 @@
+{
+ "args": {
+  "prefix": "processed/caresm_ts_withoutcome",
+  "outcomes": "processed/caresm_outcomes.joblib",
+  "num_patients": 10000,
+  "layers": 3,
+  "folds": 10,
+  "run_folds": 1,
+  "epochs": 150,
+  "dr": 0.2,
+  "lr": 0.001,
+  "wd": 0.0005,
+  "embed_dim": 32,
+  "hidden_dim": 32,
+  "device": "cpu",
+  "seed": 0,
+  "emb_std": null,
+  "out": "results/D_caresm_withoutcome_L3.json"
+ },
+ "folds": [
+  {
+   "fold": 0,
+   "best_epoch": 132,
+   "acc": 0.671,
+   "auc_weighted": 0.7937968085713564,
+   "f1_backhome": 0.716566866267465,
+   "f1_rehab": 0.7147766323024055,
+   "f1_death": 0.0,
+   "f1_macro": 0.47711449952329016,
+   "f1_weighted": 0.6262226269111261,
+   "pred_class_counts": [
+    559,
+    441,
+    0
+   ]
+  }
+ ],
+ "summary": {
+  "acc": [
+   0.671,
+   0.0
+  ],
+  "auc_weighted": [
+   0.7937968085713564,
+   0.0
+  ],
+  "f1_backhome": [
+   0.716566866267465,
+   0.0
+  ],
+  "f1_rehab": [
+   0.7147766323024055,
+   0.0
+  ],
+  "f1_death": [
+   0.0,
+   0.0
+  ],
+  "f1_macro": [
+   0.47711449952329016,
+   0.0
+  ],
+  "f1_weighted": [
+   0.6262226269111261,
+   0.0
+  ]
+ }
+}

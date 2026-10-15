@@ -1,0 +1,1 @@
+{"run": "MIMIC24s0_arm_shuffled", "fold": 6, "best_epoch": 899, "acc": 0.6258992805755396, "auc_weighted": 0.7944855818569393, "f1_backhome": 0.746031746031746, "f1_rehab": 0.5, "f1_death": 0.5714285714285714, "f1_macro": 0.6058201058201058, "f1_weighted": 0.6145369418750714}

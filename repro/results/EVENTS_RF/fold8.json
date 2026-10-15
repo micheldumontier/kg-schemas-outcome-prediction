@@ -1,0 +1,1 @@
+{"run": "EVENTS_RF", "fold": 8, "best_epoch": 0, "acc": 0.445, "auc_weighted": 0.519935251422632, "f1_backhome": 0.48484848484848486, "f1_rehab": 0.46455834242093785, "f1_death": 0.10062893081761007, "f1_macro": 0.35001191936234427, "f1_weighted": 0.42843991861995606, "pred_class_counts": [480, 485, 35]}
