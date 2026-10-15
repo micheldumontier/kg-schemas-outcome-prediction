@@ -184,6 +184,18 @@ footer { font: 0.85rem/1.5 var(--sans); color: var(--ink-2); border-top: 1px sol
   <div class="prose">
     <p>Three observations explain the published differences. The published tabular results reproduce only on an earlier version of the synthetic table, so the graph advantage reflected different data. The five-layer CARE-SM model failed because the numeric values were dropped, not because of depth or over-smoothing, since the corrected five-layer model performs well. Merging the CARE-SM graphs into one graph lost no information, because the features read back from it give the same performance as the original table.</p>
     <p>Age alone predicts the synthetic outcome as well as any model ({{syn_AGE_RF}}), and SPHN delivers it on a dedicated edge. Relabelling that edge lowers SPHN, so part of its lead came from one predicate. The care events carry no outcome signal by construction, which is why the time encodings could not differ.</p>
+    <h3>Why age is a sufficient predictor</h3>
+    <p>The reason lies in how the synthetic patients were generated. The generator in the original repository works in four steps.</p>
+  </div>
+  <ol class="checks">
+    <li>Every variable, including the outcome, is drawn independently from a distribution fitted to the 552 real patients. Categorical variables become integer codes, and no variable is standardised.</li>
+    <li>Correlations are then introduced by multiplying the table by the lower-triangular Cholesky factor of a correlation matrix. Each column becomes a weighted sum of itself and of every column that follows it in the table.</li>
+    <li>In the table the graphs were built from, the outcome is the sixth column, ahead of seventeen other variables. Its column therefore becomes a weighted sum of the initial outcome code and of those seventeen variables, age included.</li>
+    <li>That sum is cut into three classes at the target proportions (44, 43 and 12 percent).</li>
+  </ol>
+  <div class="prose">
+    <p>Age is the only continuous variable in the sum and is measured in years, while most of the others are 0/1 codes, so the sum, and hence the outcome, is close to age cut at two thresholds. The data show this directly. Mean age is 43.0, 60.1 and 74.8 years for discharge home, rehabilitation and death, with a spread of only 7 to 9 years within each class, and a rule with cut-offs near 50 and 70 years classifies 78 percent of patients correctly, the same accuracy as the graph model on SPHN ({{synacc_S}}). Variables that enter the sum with visible weight carry some signal (sex alone reaches an AUC of about 0.76), whereas length of stay, the Glasgow Coma Scale and the number of medical acts carry none. Mixing unstandardised values also pushes some variables outside clinical ranges, for example Glasgow Coma Scale values up to 52 on a scale that ends at 15. The care pathway events are generated afterwards, independently of everything else.</p>
+    <p>We infer the dominance of age from the generator code and the data. The mixing weights are stored in a serialised file in the original repository that we did not load. The figures in this subsection were computed from <code>data/syn_data.csv</code> at commit <code>1619d99</code>.</p>
   </div>
 </section>
 
