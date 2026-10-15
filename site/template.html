@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
 <style>
-/* Layout: one reading column (about 68 characters) for prose; tables and the figure widen to 920px and scroll inside their own box on phones. */
+/* Layout: one 720px column shared by prose, tables and the figure, so every block ends at the same right edge; wide tables and the figure scroll inside their own box on phones. */
 :root {
   --bg: #f7f8f9;
   --surface: #ffffff;
@@ -41,12 +41,12 @@ body {
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
-main { max-width: 920px; margin: 0 auto; padding-block: 48px 64px; display: grid; gap: 44px; }
+main { max-width: 720px; margin: 0 auto; padding-block: 48px 64px; display: grid; gap: 44px; }
 main > *, section > * { min-width: 0; }
 section { display: grid; gap: 14px; align-content: start; }
 section h2 { margin-bottom: 0; }
 .caption { margin-top: -6px; }
-.prose { max-width: 68ch; }
+.prose { max-width: none; }
 .prose p { margin: 0 0 0.9em; }
 h1, h2, h3 { font-family: var(--sans); font-weight: 600; text-wrap: balance; line-height: 1.2; margin: 0; }
 h1 { font-size: clamp(1.9rem, 4.6vw, 2.7rem); letter-spacing: -0.01em; }
@@ -60,7 +60,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .meta div { min-width: 0; }
 .meta dt { color: var(--ink-2); font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; }
 .meta dd { margin: 2px 0 0; }
-.findings { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; max-width: 76ch; }
+.findings { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
 .findings li { background: var(--surface); border: 1px solid var(--rule); border-left: 3px solid var(--accent); padding: 12px 16px; border-radius: 3px; }
 .findings strong { font-family: var(--sans); font-weight: 600; }
 .tablebox { overflow-x: auto; background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; }
@@ -70,7 +70,7 @@ th { font-weight: 600; font-size: 0.76rem; letter-spacing: 0.04em; text-transfor
 td.num, th.num { text-align: right; font-family: var(--mono); font-size: 0.84rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
 tr.group td { background: var(--accent-soft); font-weight: 600; font-size: 0.78rem; letter-spacing: 0.05em; text-transform: uppercase; }
 tbody tr:last-child td { border-bottom: 0; }
-.caption { font: 0.86rem/1.45 var(--sans); color: var(--ink-2); margin: 8px 0 0; max-width: 80ch; }
+.caption { font: 0.86rem/1.45 var(--sans); color: var(--ink-2); margin: 8px 0 0; }
 figure { margin: 0; }
 .figbox { background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; padding: 12px; overflow-x: auto; }
 .figbox svg { display: block; width: 100%; min-width: 560px; height: auto; }
@@ -80,7 +80,7 @@ svg .ci { stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; }
 svg .pt { fill: var(--accent); stroke: var(--surface); stroke-width: 2; }
 svg .lab { fill: var(--ink); font: 13px var(--sans); }
 svg .tick { fill: var(--ink-2); font: 12px var(--mono); }
-ol.checks { margin: 0; padding-left: 1.4em; max-width: 68ch; display: grid; gap: 6px; }
+ol.checks { margin: 0; padding-left: 1.4em; display: grid; gap: 6px; }
 code { font-family: var(--mono); font-size: 0.86em; background: var(--accent-soft); padding: 0.05em 0.3em; border-radius: 2px; overflow-wrap: anywhere; }
 footer { font: 0.85rem/1.5 var(--sans); color: var(--ink-2); border-top: 1px solid var(--rule); padding-top: 16px; }
 @media (max-width: 520px) { body { font-size: 16px; } main { padding-block: 28px 48px; gap: 36px; } }
