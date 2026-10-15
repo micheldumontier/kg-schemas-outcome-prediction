@@ -18,7 +18,7 @@ The original study compared SPHN and CARE-SM knowledge graphs of synthetic patie
 - A graph built with the released SPHN 2026.1 schema and standard codes (ATC, ICD-10-PCS, LOINC, SNOMED CT) matches gradient boosting.
 - Supplying ontology meaning does not change performance. Label embeddings (SapBERT), ontology embeddings (OWL2Vec*) and terminology hierarchies added as edges, from the codes themselves or from the OMOP vocabularies, all stay within 0.002 AUC of random starting vectors over three seeds.
 
-`repro/REPORT.md` describes the reproduction in detail. The manuscript is under review; its citation will be added here.
+The project page at https://micheldumontier.github.io/kg-schemas-outcome-prediction/ presents the results, with every number computed from the per-fold results by `site/build.py` (`python site/build.py` rewrites `docs/index.html`). `repro/REPORT.md` describes the reproduction in detail. The manuscript is under review; its citation will be added here.
 
 ## Contents
 

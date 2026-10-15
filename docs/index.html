@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Does the Knowledge Graph Schema Matter?</title>
+<meta name="description" content="A corrected and extended analysis of SPHN and CARE-SM knowledge graphs for clinical outcome prediction, on synthetic data and on MIMIC-IV patients with subarachnoid haemorrhage.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<style>
+/* Layout: one reading column (about 68 characters) for prose; tables and the figure widen to 920px and scroll inside their own box on phones. */
+:root {
+  --bg: #f7f8f9;
+  --surface: #ffffff;
+  --ink: #1b2129;
+  --ink-2: #4a5562;
+  --rule: #d9dee4;
+  --accent: #1f6670;
+  --accent-soft: #e3eff0;
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans: "IBM Plex Sans Condensed", "Arial Narrow", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12161b; --surface: #1a2027; --ink: #e6eaee; --ink-2: #a8b2bd; --rule: #2e3742;
+    --accent: #7cc3cb; --accent-soft: #1d3236; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12161b; --surface: #1a2027; --ink: #e6eaee; --ink-2: #a8b2bd; --rule: #2e3742;
+  --accent: #7cc3cb; --accent-soft: #1d3236; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 17px/1.6 var(--serif);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+main { max-width: 920px; margin: 0 auto; padding-block: 48px 64px; display: grid; gap: 44px; }
+main > *, section > * { min-width: 0; }
+section { display: grid; gap: 14px; align-content: start; }
+section h2 { margin-bottom: 0; }
+.caption { margin-top: -6px; }
+.prose { max-width: 68ch; }
+.prose p { margin: 0 0 0.9em; }
+h1, h2, h3 { font-family: var(--sans); font-weight: 600; text-wrap: balance; line-height: 1.2; margin: 0; }
+h1 { font-size: clamp(1.9rem, 4.6vw, 2.7rem); letter-spacing: -0.01em; }
+h2 { font-size: 1.45rem; padding-top: 14px; border-top: 1px solid var(--rule); margin-bottom: 14px; }
+h3 { font-size: 1.08rem; margin: 18px 0 8px; }
+a { color: var(--accent); text-underline-offset: 2px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.eyebrow { font: 500 0.78rem/1.2 var(--sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); margin-bottom: 12px; }
+.deck { font-size: 1.12rem; color: var(--ink-2); margin-top: 16px; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 28px; margin: 22px 0 0; padding: 0; font: 0.9rem/1.4 var(--sans); }
+.meta div { min-width: 0; }
+.meta dt { color: var(--ink-2); font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.meta dd { margin: 2px 0 0; }
+.findings { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; max-width: 76ch; }
+.findings li { background: var(--surface); border: 1px solid var(--rule); border-left: 3px solid var(--accent); padding: 12px 16px; border-radius: 3px; }
+.findings strong { font-family: var(--sans); font-weight: 600; }
+.tablebox { overflow-x: auto; background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; }
+table { border-collapse: collapse; width: 100%; font: 0.9rem/1.35 var(--sans); }
+th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-weight: 600; font-size: 0.76rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-2); white-space: nowrap; }
+td.num, th.num { text-align: right; font-family: var(--mono); font-size: 0.84rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+tr.group td { background: var(--accent-soft); font-weight: 600; font-size: 0.78rem; letter-spacing: 0.05em; text-transform: uppercase; }
+tbody tr:last-child td { border-bottom: 0; }
+.caption { font: 0.86rem/1.45 var(--sans); color: var(--ink-2); margin: 8px 0 0; max-width: 80ch; }
+figure { margin: 0; }
+.figbox { background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; padding: 12px; overflow-x: auto; }
+.figbox svg { display: block; width: 100%; min-width: 560px; height: auto; }
+svg .grid { stroke: var(--rule); stroke-width: 1; }
+svg .zero { stroke: var(--ink-2); stroke-width: 1.2; stroke-dasharray: 4 3; }
+svg .ci { stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; }
+svg .pt { fill: var(--accent); stroke: var(--surface); stroke-width: 2; }
+svg .lab { fill: var(--ink); font: 13px var(--sans); }
+svg .tick { fill: var(--ink-2); font: 12px var(--mono); }
+ol.checks { margin: 0; padding-left: 1.4em; max-width: 68ch; display: grid; gap: 6px; }
+code { font-family: var(--mono); font-size: 0.86em; background: var(--accent-soft); padding: 0.05em 0.3em; border-radius: 2px; overflow-wrap: anywhere; }
+footer { font: 0.85rem/1.5 var(--sans); color: var(--ink-2); border-top: 1px solid var(--rule); padding-top: 16px; }
+@media (max-width: 520px) { body { font-size: 16px; } main { padding-block: 28px 48px; gap: 36px; } }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <div class="eyebrow">Corrected and extended analysis · SPHN and CARE-SM · MIMIC-IV</div>
+  <h1>Does the knowledge graph schema matter for clinical outcome prediction?</h1>
+  <p class="deck prose">A study of SPHN and CARE-SM graphs of synthetic patients reported that the choice of schema changed outcome prediction substantially. We corrected the published pipeline, repeated the comparison on the original synthetic data and tested it on real patients. Once the graphs were built and checked correctly, the schema made at most a small difference, graph models performed like tabular models on the same data, and supplying ontology meaning did not change performance.</p>
+  <dl class="meta">
+    <div><dt>Author</dt><dd>Michel Dumontier, Maastricht University</dd></div>
+    <div><dt>Original study</dt><dd><a href="https://arxiv.org/abs/2502.21138">Jhee et al., ESWC 2025</a></dd></div>
+    <div><dt>Code and results</dt><dd><a href="https://github.com/micheldumontier/kg-schemas-outcome-prediction">kg-schemas-outcome-prediction</a></dd></div>
+    <div><dt>Status</dt><dd>Manuscript prepared for MIE 2027</dd></div>
+  </dl>
+</header>
+
+<section aria-labelledby="findings">
+  <h2 id="findings">Main findings</h2>
+  <ul class="findings">
+    <li><strong>The published numbers reproduce.</strong> On the original synthetic data, the R-GCN with literal encoder reaches AUC 0.910 ± 0.007 on SPHN and 0.502 ± 0.011 on CARE-SM, as reported.</li>
+    <li><strong>Graphs did not outperform tabular models.</strong> The original tabular baselines were computed on a different synthetic table. On the table the graphs were built from, logistic regression reaches 0.918 ± 0.006.</li>
+    <li><strong>The CARE-SM result came from pipeline defects.</strong> Preprocessing dropped every numeric value, and every feature lay four message-passing steps from the patient while the model reached three. With both corrected, CARE-SM reaches 0.821 ± 0.015, and 0.889 ± 0.008 with node embeddings at a usable scale.</li>
+    <li><strong>On real patients the schemas perform similarly.</strong> For 1,388 patients with subarachnoid haemorrhage in MIMIC-IV, CARE-SM (0.808 ± 0.032) is slightly but consistently ahead of the template SPHN graph (0.791 ± 0.032), and gradient boosting on the same features reaches 0.813 ± 0.023. A graph built with the released SPHN 2026.1 schema and standard codes reaches 0.813 ± 0.030.</li>
+    <li><strong>Ontology meaning did not help.</strong> Label embeddings, ontology embeddings and terminology hierarchies all stayed within 0.002 AUC of random starting vectors, with confidence intervals that include zero.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="question">
+  <h2 id="question">The original study</h2>
+  <div class="prose">
+    <p>Jhee and colleagues generated 10,000 synthetic patients modelled on 552 people with a ruptured intracranial aneurysm and represented them as knowledge graphs following two schemas, the Swiss Personalized Health Network (SPHN) schema and CARE-SM, a model built on the Semanticscience Integrated Ontology. They asked three questions. Do graph models outperform tabular models? Does the schema matter? Does the way time is encoded matter? They reported that a relational graph convolutional network (R-GCN) with a literal encoder outperformed tabular models (AUC 0.91 against at most 0.71), that SPHN outperformed CARE-SM (0.91 against 0.50), and that time encodings performed alike.</p>
+    <p>The task is three-class node classification of the outcome at the end of the stay (discharge home, rehabilitation or death), evaluated with stratified 10-fold cross-validation and weighted one-versus-rest AUC.</p>
+  </div>
+</section>
+
+<section aria-labelledby="checked">
+  <h2 id="checked">What we checked</h2>
+  <div class="prose">
+    <p>We reran the public pipeline (<a href="https://github.com/TeamHeKA/neurovasc">TeamHeKA/neurovasc</a>, commit <code>1619d99</code>) with its pinned software and the original protocol: the same folds, one ninth of each training set for validation, 2,000 full-batch epochs and the checkpoint with the best validation accuracy. Every change to the original code is marked in the repository. We then corrected the errors listed below and compared each configuration with tabular models on the same patients and folds.</p>
+  </div>
+  <div class="tablebox">
+    <table>
+      <thead><tr><th>Issue in the original pipeline</th><th>Effect</th><th>Correction</th></tr></thead>
+      <tbody>
+        <tr><td>Tabular and graph models used different synthetic tables</td><td>The graph advantage reflected the data</td><td>Tabular models rerun on the graph table</td></tr>
+        <tr><td>The CARE-SM literal filter used a predicate absent from the graph</td><td>All 40,000 numeric values dropped</td><td>Filter corrected</td></tr>
+        <tr><td>CARE-SM features four steps from the patient, with a three-layer model</td><td>No feature within the model's reach</td><td>Four or five layers</td></tr>
+        <tr><td>Untrained node embeddings near zero</td><td>Node identity almost invisible</td><td>Unit-scale initialisation</td></tr>
+        <tr><td>Care pathways generated independently of the outcome</td><td>Time encodings could not differ</td><td>Tested on real data</td></tr>
+        <tr><td>Locally minted IRIs and two incorrect procedure codes</td><td>No resolvable semantics</td><td>Released terms and verified codes on real data</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="prose">
+    <h3>Real patients</h3>
+    <p>From MIMIC-IV v3.1 we selected adults with a first admission coded for non-traumatic subarachnoid haemorrhage. At landmarks 24, 48 and 72 hours after admission, patients still alive and in hospital entered the analysis (1,388, 1,287 and 1,190 patients). Features used only information recorded before the landmark, namely age, sex, Glasgow Coma Scale, vital signs, laboratory values and the presence and timing of eight treatments. The outcome was discharge home (560 at 24 hours), to rehabilitation or care (530), or death including hospice (298).</p>
+    <p>We built SPHN and CARE-SM graphs following the original templates, an SPHN variant with time relations, a compiled CARE-SM graph with shortcut edges from each patient to each feature, and a graph using the released SPHN 2026.1 classes and properties with ATC, ICD-10-PCS, LOINC and SNOMED CT codes. Before training, every graph was checked automatically. Every numeric value had to reach the model, every feature had to lie within the model's reach, and no outcome edge could be present. Patient-specific nodes started from zero embeddings to prevent memorisation.</p>
+    <p>To test whether ontology meaning helps, we varied only the class and code nodes shared across patients. They started from random vectors, from SapBERT embeddings of their labels (also shuffled across nodes as a control) or from OWL2Vec* embeddings of the SPHN schema extended with the code hierarchies. Alternatively, their ancestors were added as graph edges, from the ATC and ICD-10-PCS codes themselves or from the OMOP vocabularies, which add SNOMED CT and LOINC ancestors.</p>
+    <p>Models were compared on the same ten folds with paired t-tests, and we report mean differences with 95% confidence intervals. Only aggregate results left the secure environment, and counts below 11 are never reported.</p>
+  </div>
+</section>
+
+<section aria-labelledby="synthetic">
+  <h2 id="synthetic">Synthetic data</h2>
+  <div class="tablebox">
+    <table>
+      <thead><tr><th>Configuration</th><th class="num">AUC</th><th class="num">Accuracy</th></tr></thead>
+      <tbody>
+        <tr class="group"><td colspan="3">As published</td></tr>
+        <tr><td>SPHN, R-GCN with literal encoder, 3 layers (paper 0.91)</td><td class="num">0.910 ± 0.007</td><td class="num">0.781 ± 0.013</td></tr>
+        <tr><td>CARE-SM, R-GCN with literal encoder, 3 layers (paper 0.50)</td><td class="num">0.502 ± 0.011</td><td class="num">0.439 ± 0.007</td></tr>
+        <tr><td>CARE-SM as published, 5 layers</td><td class="num">0.499 ± 0.018</td><td class="num">0.439 ± 0.007</td></tr>
+        <tr class="group"><td colspan="3">Corrected CARE-SM</td></tr>
+        <tr><td>Numeric values restored, 4 layers</td><td class="num">0.821 ± 0.015</td><td class="num">0.662 ± 0.022</td></tr>
+        <tr><td>Numeric values restored, 5 layers</td><td class="num">0.833 ± 0.013</td><td class="num">0.678 ± 0.014</td></tr>
+        <tr><td>Numeric values restored, 4 layers, unit-scale embeddings</td><td class="num">0.889 ± 0.008</td><td class="num">0.749 ± 0.011</td></tr>
+        <tr><td>Numeric values restored, 5 layers, unit-scale embeddings</td><td class="num">0.890 ± 0.008</td><td class="num">0.750 ± 0.010</td></tr>
+        <tr class="group"><td colspan="3">Diagnostics</td></tr>
+        <tr><td>SPHN with the dedicated age edge relabelled as a diagnosis edge</td><td class="num">0.843 ± 0.068</td><td class="num">0.736 ± 0.044</td></tr>
+        <tr><td>Random forest on features read back from the CARE-SM graph</td><td class="num">0.917 ± 0.006</td><td class="num">0.783 ± 0.013</td></tr>
+        <tr><td>CARE-SM with an outcome edge per patient (leakage test)</td><td class="num">0.981 ± 0.040</td><td class="num">0.962 ± 0.060</td></tr>
+        <tr class="group"><td colspan="3">Tabular models on the table the graphs were built from</td></tr>
+        <tr><td>Logistic regression</td><td class="num">0.918 ± 0.006</td><td class="num">0.782 ± 0.013</td></tr>
+        <tr><td>Random forest</td><td class="num">0.916 ± 0.006</td><td class="num">0.781 ± 0.010</td></tr>
+        <tr><td>Neural network (the original architecture)</td><td class="num">0.912 ± 0.007</td><td class="num">0.778 ± 0.013</td></tr>
+        <tr><td>Random forest, age only</td><td class="num">0.914 ± 0.007</td><td class="num">0.784 ± 0.014</td></tr>
+        <tr><td>Random forest, care events only</td><td class="num">0.504 ± 0.019</td><td class="num">0.432 ± 0.015</td></tr>
+        <tr class="group"><td colspan="3">Tabular models on the earlier table behind the published tabular results</td></tr>
+        <tr><td>Logistic regression</td><td class="num">0.707 ± 0.014</td><td class="num">0.560 ± 0.016</td></tr>
+        <tr><td>Random forest</td><td class="num">0.708 ± 0.011</td><td class="num">0.564 ± 0.013</td></tr>
+        <tr><td>Neural network</td><td class="num">0.702 ± 0.015</td><td class="num">0.560 ± 0.013</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="caption">Test AUC (weighted one-versus-rest) and accuracy, mean and standard deviation over the original 10 folds with 2,000 epochs.</p>
+  <div class="prose">
+    <p>Three observations explain the published differences. The published tabular results reproduce only on an earlier version of the synthetic table, so the graph advantage reflected different data. The five-layer CARE-SM model failed because the numeric values were dropped, not because of depth or over-smoothing, since the corrected five-layer model performs well. Merging the CARE-SM graphs into one graph lost no information, because the features read back from it give the same performance as the original table.</p>
+    <p>Age alone predicts the synthetic outcome as well as any model (0.914 ± 0.007), and SPHN delivers it on a dedicated edge. Relabelling that edge lowers SPHN, so part of its lead came from one predicate. The care events carry no outcome signal by construction, which is why the time encodings could not differ.</p>
+  </div>
+</section>
+
+<section aria-labelledby="mimic">
+  <h2 id="mimic">Real patients in MIMIC-IV</h2>
+  <div class="tablebox">
+    <table>
+      <thead><tr><th>Model</th><th class="num">24 hours</th><th class="num">48 hours</th><th class="num">72 hours</th></tr></thead>
+      <tbody>
+        <tr><td>Gradient boosting</td><td class="num">0.813 ± 0.023</td><td class="num">0.818 ± 0.034</td><td class="num">0.829 ± 0.038</td></tr>
+        <tr><td>CARE-SM graph, 4 layers</td><td class="num">0.808 ± 0.032</td><td class="num">0.818 ± 0.032</td><td class="num">0.812 ± 0.052</td></tr>
+        <tr><td>Compiled CARE-SM graph, 3 layers</td><td class="num">0.805 ± 0.030</td><td class="num">0.820 ± 0.026</td><td class="num">0.823 ± 0.025</td></tr>
+        <tr><td>Logistic regression</td><td class="num">0.793 ± 0.023</td><td class="num">0.804 ± 0.035</td><td class="num">0.813 ± 0.025</td></tr>
+        <tr><td>SPHN graph (original template), timestamps</td><td class="num">0.791 ± 0.032</td><td class="num">0.793 ± 0.038</td><td class="num">0.808 ± 0.037</td></tr>
+        <tr><td>SPHN graph, timestamps and time relations</td><td class="num">0.784 ± 0.033</td><td class="num">0.787 ± 0.037</td><td class="num">0.806 ± 0.031</td></tr>
+        <tr><td>SPHN 2026.1 graph, released terms, both edge directions</td><td class="num">0.813 ± 0.030</td><td class="num"></td><td class="num"></td></tr>
+        <tr><td>Gradient boosting, care events only</td><td class="num">0.682 ± 0.039</td><td class="num">0.694 ± 0.038</td><td class="num">0.690 ± 0.033</td></tr>
+        <tr><td>Gradient boosting, age only</td><td class="num">0.605 ± 0.029</td><td class="num">0.601 ± 0.042</td><td class="num">0.631 ± 0.024</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="caption">Test AUC, mean and standard deviation over 10 folds, seed 0. Accuracy of gradient boosting at 24 hours is 0.646 ± 0.028.</p>
+
+  <h3>CARE-SM against the template SPHN graph</h3>
+  <div class="tablebox">
+    <table>
+      <thead><tr><th>Landmark and seed</th><th class="num">Difference in AUC</th><th class="num">95% CI</th><th class="num">p</th></tr></thead>
+      <tbody>
+<tr><td>24 h, seed 0</td><td class="num">+0.017</td><td class="num">−0.010 to +0.044</td><td class="num">0.19</td></tr>
+<tr><td>48 h, seed 0</td><td class="num">+0.025</td><td class="num">−0.004 to +0.054</td><td class="num">0.08</td></tr>
+<tr><td>72 h, seed 0</td><td class="num">+0.004</td><td class="num">−0.021 to +0.029</td><td class="num">0.73</td></tr>
+<tr><td>24 h, seed 1</td><td class="num">+0.022</td><td class="num">+0.009 to +0.036</td><td class="num">0.005</td></tr>
+<tr><td>24 h, seed 2</td><td class="num">+0.016</td><td class="num">−0.004 to +0.037</td><td class="num">0.11</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="caption">CARE-SM minus SPHN on the same folds. The difference is positive in all five comparisons and significant in one.</p>
+
+  <h3>Other comparisons at 24 hours</h3>
+  <div class="tablebox">
+    <table>
+      <thead><tr><th>Comparison</th><th class="num">Difference in AUC</th><th class="num">95% CI</th><th class="num">p</th></tr></thead>
+      <tbody>
+<tr><td>Compiled CARE-SM minus CARE-SM</td><td class="num">−0.003</td><td class="num">−0.028 to +0.022</td><td class="num">0.77</td></tr>
+<tr><td>SPHN with time relations minus SPHN</td><td class="num">−0.007</td><td class="num">−0.025 to +0.011</td><td class="num">0.40</td></tr>
+<tr><td>Gradient boosting minus CARE-SM</td><td class="num">+0.005</td><td class="num">−0.012 to +0.022</td><td class="num">0.54</td></tr>
+<tr><td>Gradient boosting minus template SPHN</td><td class="num">+0.022</td><td class="num">+0.001 to +0.042</td><td class="num">0.04</td></tr>
+<tr><td>Template SPHN, both directions minus one direction</td><td class="num">+0.002</td><td class="num">−0.016 to +0.020</td><td class="num">0.79</td></tr>
+<tr><td>Released SPHN 2026.1 minus template SPHN, both directions</td><td class="num">+0.020</td><td class="num">+0.003 to +0.037</td><td class="num">0.03</td></tr>
+<tr><td>Gradient boosting minus released SPHN 2026.1</td><td class="num">−0.001</td><td class="num">−0.014 to +0.013</td><td class="num">0.92</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="prose">
+    <p>Unlike the synthetic data, age alone predicted the outcome weakly while the care events and their timing carried signal. Compiling CARE-SM and adding time relations to SPHN changed nothing. Passing messages in both directions did not change the template SPHN graph, but the graph built with released SPHN terms performed better and matched gradient boosting. Because that graph differs from the template in several ways at once, including its layout and depth, the gain cannot be attributed to the released terms themselves.</p>
+  </div>
+</section>
+
+<section aria-labelledby="semantics">
+  <h2 id="semantics">Does ontology meaning help?</h2>
+  <figure>
+    <div class="figbox">
+<svg viewBox="0 0 720 234" role="img" aria-label="Difference in AUC from random starting vectors with 95% confidence intervals; every interval includes zero.">
+<line class="grid" x1="360.0" x2="360.0" y1="26" y2="208"/>
+<text class="tick" x="360.0" y="226" text-anchor="middle">−0.010</text>
+<line class="grid" x1="435.0" x2="435.0" y1="26" y2="208"/>
+<text class="tick" x="435.0" y="226" text-anchor="middle">−0.005</text>
+<line class="zero" x1="510.0" x2="510.0" y1="26" y2="208"/>
+<text class="tick" x="510.0" y="226" text-anchor="middle">0</text>
+<line class="grid" x1="585.0" x2="585.0" y1="26" y2="208"/>
+<text class="tick" x="585.0" y="226" text-anchor="middle">+0.005</text>
+<line class="grid" x1="660.0" x2="660.0" y1="26" y2="208"/>
+<text class="tick" x="660.0" y="226" text-anchor="middle">+0.010</text>
+<text class="tick" x="510.0" y="18" text-anchor="middle">difference in AUC</text>
+<text class="lab" x="316" y="55.0" text-anchor="end">SapBERT label embeddings, shuffled across nodes</text>
+<line class="ci" x1="407.6" x2="581.0" y1="51.0" y2="51.0"/>
+<circle class="pt" cx="494.3" cy="51.0" r="5"/>
+<text class="lab" x="316" y="89.0" text-anchor="end">SapBERT label embeddings</text>
+<line class="ci" x1="414.5" x2="571.1" y1="85.0" y2="85.0"/>
+<circle class="pt" cx="492.8" cy="85.0" r="5"/>
+<text class="lab" x="316" y="123.0" text-anchor="end">OWL2Vec* ontology embeddings</text>
+<line class="ci" x1="349.9" x2="601.1" y1="119.0" y2="119.0"/>
+<circle class="pt" cx="475.5" cy="119.0" r="5"/>
+<text class="lab" x="316" y="157.0" text-anchor="end">ATC and ICD-10-PCS hierarchies as edges</text>
+<line class="ci" x1="406.4" x2="634.5" y1="153.0" y2="153.0"/>
+<circle class="pt" cx="520.4" cy="153.0" r="5"/>
+<text class="lab" x="316" y="191.0" text-anchor="end">OMOP hierarchies as edges (adds SNOMED CT and LOINC)</text>
+<line class="ci" x1="420.3" x2="580.3" y1="187.0" y2="187.0"/>
+<circle class="pt" cx="500.3" cy="187.0" r="5"/>
+</svg>
+    </div>
+    <figcaption class="caption">Difference in AUC from random starting vectors for the shared class and code nodes, with 95% confidence intervals over 10 folds (each fold averaged over three seeds). Every interval includes zero.</figcaption>
+  </figure>
+  <div class="tablebox">
+    <table>
+      <thead><tr><th>What the shared class and code nodes received</th><th class="num">AUC</th><th class="num">Difference</th><th class="num">95% CI</th><th class="num">p</th></tr></thead>
+      <tbody>
+<tr><td>Random vectors (reference)</td><td class="num">0.812 ± 0.027</td><td></td><td></td><td></td></tr>
+<tr><td>SapBERT label embeddings, shuffled across nodes</td><td class="num">0.811 ± 0.028</td><td class="num">−0.001</td><td class="num">−0.007 to +0.005</td><td class="num">0.69</td></tr>
+<tr><td>SapBERT label embeddings</td><td class="num">0.811 ± 0.032</td><td class="num">−0.001</td><td class="num">−0.006 to +0.004</td><td class="num">0.63</td></tr>
+<tr><td>OWL2Vec* ontology embeddings</td><td class="num">0.810 ± 0.028</td><td class="num">−0.002</td><td class="num">−0.011 to +0.006</td><td class="num">0.55</td></tr>
+<tr><td>ATC and ICD-10-PCS hierarchies as edges</td><td class="num">0.813 ± 0.029</td><td class="num">+0.001</td><td class="num">−0.007 to +0.008</td><td class="num">0.84</td></tr>
+<tr><td>OMOP hierarchies as edges (adds SNOMED CT and LOINC)</td><td class="num">0.812 ± 0.027</td><td class="num">−0.001</td><td class="num">−0.006 to +0.005</td><td class="num">0.79</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="prose">
+    <p>None of the five ways of supplying ontology content changed performance by more than 0.002 AUC, and the differences are smaller than the variation between seeds. The two embeddings do carry different information. OWL2Vec* places heart rate next to the other vital-sign results and the drugs together, while SapBERT groups labels by wording. On these features the models use the graph layout and the numeric values rather than the meaning of the terms. The feature set is small and dense, so related codes have little need to share strength, and settings with many sparse codes may behave differently.</p>
+  </div>
+</section>
+
+<section aria-labelledby="meaning">
+  <h2 id="meaning">What this means</h2>
+  <div class="prose">
+    <p>The large schema effect in the original study came from how the graphs were built and preprocessed. Once corrected, the schema made at most a small difference, and graph models performed as well as, but not better than, tabular models on the same data. The original graphs used locally minted identifiers, and no hierarchy or reasoning entered the models, so the comparison was one of graph structures rather than of ontologies. Our experiments with released terms, standard codes, embeddings and hierarchies support this reading.</p>
+    <p><strong>Limitations.</strong> The real-data analysis covers one centre and one outcome definition. MIMIC-IV has no structured aneurysm severity score, and treatments partly reflect severity, so their signal is prognostic rather than causal. We did not rerun the TransE and RDF2Vec baselines of the original study, whose code is not in its repository.</p>
+  </div>
+  <h3>Seven checks for clinical knowledge graph studies</h3>
+  <ol class="checks">
+    <li>Compare graph and tabular models on the same data, patients and folds.</li>
+    <li>Confirm that the model depth covers the longest path from the prediction target to each feature.</li>
+    <li>Verify that every literal reaches the model, for example by counting the values ingested.</li>
+    <li>Ablate predicate identity, since a dedicated predicate can carry most of the signal.</li>
+    <li>Confirm that synthetic data contain the signal a comparison is meant to detect.</li>
+    <li>Use resolvable ontology terms and verified codes, and validate graphs against the source ontologies.</li>
+    <li>Publish the code for every reported configuration.</li>
+  </ol>
+</section>
+
+<section aria-labelledby="reproduce">
+  <h2 id="reproduce">Reproducing these results</h2>
+  <div class="prose">
+    <p>All code, pinned environments and per-fold results are in <a href="https://github.com/micheldumontier/kg-schemas-outcome-prediction">the repository</a>, and every number on this page is computed from those results by <code>site/build.py</code>. The synthetic data and original code are available from TeamHeKA/neurovasc. MIMIC-IV requires credentialed access through <a href="https://physionet.org/content/mimiciv/">PhysioNet</a>. The OMOP-based hierarchy needs a vocabulary export from <a href="https://athena.ohdsi.org/">Athena</a>, which includes licensed SNOMED CT and LOINC content.</p>
+    <p>The original authors' repository notes the discrepancy between the tabular and graph data. We shared these findings with the original authors before publication and thank them for their responses.</p>
+  </div>
+</section>
+
+<footer>
+  Michel Dumontier, Maastricht University. Code under the MIT licence. Analysis carried out with the help of an AI assistant (Claude, Anthropic) under the author's direction. Citation to follow.
+</footer>
+
+</main>
+</body>
+</html>
