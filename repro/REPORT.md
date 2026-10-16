@@ -31,6 +31,8 @@ protocol) supersede its numbers. Two single-fold results changed materially and 
 | Round trip (RF on features read back from CARE-SM) | | 0.917 ± 0.006 | |
 
 **Corrections to the conclusions below.**
+- The extra relation in the paper's Table 5 statistics is the outcome triple counted in the statistics, not an edge in
+  the training graph (see the updated conclusion in section 4).
 - The `hasAge` ablation (G) lowers SPHN to 0.843 over 10 folds, not 0.678. The dedicated predicate explains part of
   the SPHN advantage, not most of it, and the effect varies between folds (standard deviation 0.068).
 - With five layers the corrected CARE-SM model reaches 0.833 (E5), so the original authors' five-layer failure came from
@@ -110,10 +112,17 @@ The failures are in how the graph is turned into model input and in the model's 
   graph-over-tabular advantage on the data the graph pipeline actually uses.
 - SPHN beats CARE-SM mainly because age — which alone yields AUC 0.915 — arrives on a dedicated `hasAge` predicate.
   Relabelling that one predicate drops SPHN to 0.678 (G). "Schema compactness" is not the operative factor.
-- The extra per-patient relation in the paper's CARE-SM\* statistics is consistent with `hasOutcome`. With the repo's
-  runner such a label edge is exploited (D2: AUC 0.955, Rehab F1 = 1.00 — above the 0.918 any honest model reaches), so a
-  0.50 result is inconsistent with that edge being present *and* fed to the same runner for 2000 epochs. Either the extra
-  relation is something else, or the CARE-SM runner differed; that runner is not in the repository.
+- The extra per-patient relation in the paper's Table 5 is the outcome triple, counted in the statistics only. Both
+  generators (`CARESM-graph_generation.ipynb` and `exp/generation/sphn_generation.py`) emit
+  `nvasc:synth_patient_N nvasc:hasOutcome nvasc:outcome_X` while the outcome column is present, and drop that column
+  before building the graph used for training. Table 5 is one relation and about 10,000 triples (one per patient) above
+  the outcome-free graphs for both schemas (SPHN: 15 relations and 1,127,467 triples against 14 and 1,116,191 in the
+  committed training graph, which has no outcome node; CARE-SM\*-ts: 13 and 1,754,505 against 12 and 1,744,505), so the
+  statistics were computed with the outcome triple in and the models trained without it. With the repo's runner such a
+  label edge is exploited (D2: AUC 0.981 over 10 folds), so the CARE-SM 0.50 result is also consistent with an
+  outcome-free training graph. The CARE-SM training notebook itself is not in the repository. The original authors
+  pointed us to the notebook's `nvasc:hasTimePoint` link (October 2026); that link is already among the 12 relations of
+  our regenerated graph, which led to this explanation.
 - Training is fragile: with untrained, near-zero node embeddings, even a direct label edge takes ~130–260 epochs to be
   noticed (D/D2 sit at chance until then), so conclusions drawn from a fixed epoch budget can hinge on optimisation.
 
