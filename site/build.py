@@ -48,6 +48,8 @@ def values():
                 'LR_SEPT2024', 'RF_SEPT2024', 'NN_SEPT2024', 'ROUNDTRIP_RF']:
         v[f'syn_{run}'] = ms(folds(SYN / run))
         v[f'synacc_{run}'] = ms(folds(SYN / run, 'acc'))
+    for run in ['NB_A', 'NB_E', 'NB_F']:                  # the authors' CARE-SM training notebook, own settings
+        v[f'syn_{run}'] = ms(folds(SYN / 'notebook' / run))
     runs = ['GBM', 'LR', 'caresm_ts', 'caresm_comp', 'sphn_ts', 'sphn_tsr', 'EVENTS_GBM', 'AGE_GBM']
     for L in (24, 48, 72):
         for r in runs:

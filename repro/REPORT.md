@@ -84,8 +84,12 @@ The failures are in how the graph is turned into model input and in the model's 
    `Parameter` is not registered in the model) — negligible next to the literal-encoder bias (~0.46).
 5. Reasoning step (`time:before` CONSTRUCT) is correct SPARQL but produces all ordered pairs (fully saturated), not
    direct successors as the paper describes; irrelevant to the paper's CARE-SM\*-ts row (no `time:before`).
-6. The CARE-SM RGCN runner is not in the repository; the notebook cannot run on `data/syn_data.csv` as committed
-   (it expects an `outcome` column; the CSV has `output`).
+6. The CARE-SM RGCN runner was not in the repository when the audit started. The original authors shared their CARE-SM
+   training notebook (`notebooks/Graphs/rgcn_node_pred_care-sm.ipynb`) on 18 October 2026. It uses the same model as the
+   SPHN script, but with embedding size 100, fold seed 42 (for both `StratifiedKFold` and `train_test_split`), 3 layers,
+   10 folds, 2,000 epochs and the best validation accuracy checkpoint, and it reads an outcome-free graph from
+   `processed_data`. The graph generation notebook still cannot run on `data/syn_data.csv` as committed (it expects an
+   `outcome` column; the CSV has `output`).
 
 ## 3. Experiments (fold 0, test set of 1,000 patients)
 
@@ -120,9 +124,17 @@ The failures are in how the graph is turned into model input and in the model's 
   committed training graph, which has no outcome node; CARE-SM\*-ts: 13 and 1,754,505 against 12 and 1,744,505), so the
   statistics were computed with the outcome triple in and the models trained without it. With the repo's runner such a
   label edge is exploited (D2: AUC 0.981 over 10 folds), so the CARE-SM 0.50 result is also consistent with an
-  outcome-free training graph. The CARE-SM training notebook itself is not in the repository. The original authors
+  outcome-free training graph. The CARE-SM training notebook was not in the repository at the time; the original authors
+  shared it on 18 October 2026, and it confirms this (outcome-free graph read from `processed_data`; see the next
+  bullet for the results with its own settings). The original authors earlier
   pointed us to the notebook's `nvasc:hasTimePoint` link (October 2026); that link is already among the 12 relations of
   our regenerated graph, which led to this explanation.
+- With the notebook's own settings (`run_notebook_caresm.py`, a marked port: embedding 100, fold seed 42, 3 layers,
+  2,000 epochs, 10 folds) the published result is reproduced. The graph as published gives AUC 0.502 ± 0.018 over 10
+  folds (NB_A), against the paper's 0.50 ± 0.02 and the audit's own run A (0.494 on fold 0). With the literal predicate
+  fixed and 4 layers the notebook's settings give 0.822 ± 0.008 (NB_E; audit run E 0.809 on fold 0), and with
+  N(0, 1) node embeddings 0.886 ± 0.006 (NB_F; audit run F 0.882 on fold 0). Per-fold files are in
+  `results/notebook/`. The notebook does not seed torch, so these runs are not bit-reproducible.
 - Training is fragile: with untrained, near-zero node embeddings, even a direct label edge takes ~130–260 epochs to be
   noticed (D/D2 sit at chance until then), so conclusions drawn from a fixed epoch budget can hinge on optimisation.
 
