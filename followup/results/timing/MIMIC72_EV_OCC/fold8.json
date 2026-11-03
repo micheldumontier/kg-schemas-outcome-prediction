@@ -1,0 +1,1 @@
+{"run": "MIMIC72_EV_OCC", "fold": 8, "best_epoch": 0, "acc": 0.5294117647058824, "auc_weighted": 0.7131089206374543, "f1_backhome": 0.5641025641025641, "f1_rehab": 0.578125, "f1_death": 0.25, "f1_macro": 0.4640758547008547, "f1_weighted": 0.5174396681749622}
