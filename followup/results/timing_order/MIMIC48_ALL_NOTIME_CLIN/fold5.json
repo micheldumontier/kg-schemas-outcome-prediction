@@ -1,0 +1,1 @@
+{"run": "MIMIC48_ALL_NOTIME_CLIN", "fold": 5, "best_epoch": 0, "acc": 0.6976744186046512, "auc_weighted": 0.8282754067637789, "f1_backhome": 0.7647058823529411, "f1_rehab": 0.7068965517241379, "f1_death": 0.5, "f1_macro": 0.6572008113590263, "f1_weighted": 0.6901033067597528}
