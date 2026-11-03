@@ -1,0 +1,1 @@
+{"run": "MIMIC24s1_caresm_sio_part_L3", "fold": 4, "best_epoch": 1554, "acc": 0.6402877697841727, "auc_weighted": 0.8217428720119213, "f1_backhome": 0.7192982456140351, "f1_rehab": 0.6140350877192983, "f1_death": 0.52, "f1_macro": 0.6177777777777779, "f1_weighted": 0.6361479237662501}
