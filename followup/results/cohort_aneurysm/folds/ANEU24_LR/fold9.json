@@ -1,1 +1,1 @@
-{"run": "ANEU24_LR", "fold": 9, "best_epoch": 0, "acc": 0.6046511627906976, "auc_weighted": 0.7844133668552273, "f1_backhome": 0.7027027027027027, "f1_rehab": 0.5641025641025641, "f1_death": 0.4, "f1_macro": 0.5556017556017556, "f1_weighted": 0.6024464536092443}
+{"run": "ANEU24_LR", "fold": 9, "best_epoch": 0, "auc_weighted": 0.7844133668552273, "f1_macro": 0.5556017556017556}

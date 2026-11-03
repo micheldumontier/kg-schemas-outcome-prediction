@@ -1,1 +1,1 @@
-{"run": "ANEU24_EVENTS_GBM", "fold": 0, "best_epoch": 0, "acc": 0.6136363636363636, "auc_weighted": 0.7618927125506072, "f1_backhome": 0.7027027027027027, "f1_rehab": 0.6363636363636364, "f1_death": 0.0, "f1_macro": 0.4463554463554464, "f1_weighted": 0.5797408979227161}
+{"run": "ANEU24_EVENTS_GBM", "fold": 0, "best_epoch": 0, "auc_weighted": 0.7618927125506072, "f1_macro": 0.4463554463554464}
