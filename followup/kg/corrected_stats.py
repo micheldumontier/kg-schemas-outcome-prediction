@@ -1,8 +1,8 @@
 """Paired comparisons over the 10 cross-validation folds with the Nadeau-Bengio corrected resampled t-test.
 
 Usage: python corrected_stats.py <mimic24 results dir> <caresm_variants results dir> <output prefix> [synthetic results dir]
-e.g. from the repository root: python followup/kg/corrected_stats.py followup/results/mimic24
-  followup/results/caresm_variants followup/results/corrected_stats repro/results
+e.g. python followup/kg/corrected_stats.py followup/results/mimic24 followup/results/caresm_variants
+  followup/results/corrected_stats repro/results, from the repository root.
 Training sets of the folds overlap, so the plain paired t-test understates the variance of a mean fold difference.
 The corrected test (Nadeau and Bengio, 2003) scales the variance by 1/k + n_test/n_train; with the paper's splits
 (one tenth for testing, one ninth of the rest for validation) n_test/n_train = 0.1/0.8 = 0.125. Runs over several

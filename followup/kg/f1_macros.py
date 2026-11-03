@@ -1,7 +1,7 @@
 """LaTeX macros for macro-F1 (10-fold mean and SD) of the runs in Table 2 of the MIE paper.
 
 Usage: python f1_macros.py <repro results dir> <mimic24 results dir> <output .tex>
-e.g. from the repository root: python followup/kg/f1_macros.py repro/results followup/results/mimic24 f1macro.tex
+e.g. python followup/kg/f1_macros.py repro/results followup/results/mimic24 f1macro.tex (from the repository root)
 Synthetic runs (repro/results) give \\fmac<key>, MIMIC-IV runs at 24 h give \\mfmac<key>, with the keys of the existing
 AUC and accuracy macros (numbers.tex and mimic.tex). Aggregates only.
 """

@@ -1,6 +1,6 @@
 """Queue of R-GCN runs on the aneurysm-repair subset (paper flags), with GPU and RAM launch checks.
 
-Usage (on the A40, from the repository's repro/ directory, with the Python of repro/requirements.txt):
+Run on the A40 from the repository's repro/ directory, with the Python of repro/requirements.txt.
   python ../followup/kg/cohort_runs.py <graphs dir> <results dir> <log dir> <parallel>
 <graphs dir> holds the subset's graphs from make_graphs.py; run names are ANEU24_<variant>.
 """

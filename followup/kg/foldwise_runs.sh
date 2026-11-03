@@ -5,7 +5,7 @@
 #      RES (results dir, default ~/mimic-iv/derived/foldwise/results), PROBS (patient-level probabilities for lanes C
 #      and D, default ~/mimic-iv/derived/foldwise/probs, never copied off the machine), LOGS, EPOCHS (default 2000),
 #      RUN_FOLDS (optional).
-# The tabular runs use followup/kg/tabular_mimic.py from the repository root, with PYTHONPATH=repro:
+# The tabular runs below use followup/kg/tabular_mimic.py from the repository root, with PYTHONPATH=repro.
 #   tabular_mimic.py <features_L24.parquet> $RES MIMIC24 --calibration                    (MIMIC24_<model>_cal)
 #   tabular_mimic.py <features_L24.parquet> $RES MIMIC24 --models LR,GBM --suffix _probs --save_probs $PROBS
 #   tabular_mimic.py <features_L24.parquet> $RES MIMIC24 --models GBM_recal --suffix '' --save_probs $PROBS

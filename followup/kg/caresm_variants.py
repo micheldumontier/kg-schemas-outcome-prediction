@@ -12,7 +12,7 @@ the patient-specific node <http://nvasc.org/p<i>/<event>_start>. Hop counts are 
 Attribute outputs are those typed nvasc:feature/... (gender and every numeric field); event outputs are typed
 nvasc:event/....
 
-Usage (on the GPU machine, from the repository root, with the environment of repro/requirements.txt):
+Run on the GPU machine from the repository root, with the environment of repro/requirements.txt.
   python followup/kg/caresm_variants.py build <features_L24.parquet> ~/mimic-iv/derived/caresm_variants/graphs_L24 \
       ~/mimic-iv/derived/graphs_L24/outcomes.joblib
       Writes the four graphs in the runner's format and prints statistics, check results and hop maxima only. The

@@ -1,8 +1,8 @@
 """Pooled out-of-fold calibration: slope, calibration-in-the-large and ECE per class, with bootstrap CIs.
 
 Usage: python calibration_slopes.py <probs dir> <output dir>
-e.g. on the secure machine, from the repository root:
-  python followup/kg/calibration_slopes.py ~/mimic-iv/derived/foldwise/probs followup/results/calibration
+e.g. python followup/kg/calibration_slopes.py ~/mimic-iv/derived/foldwise/probs followup/results/calibration
+  on the secure machine, from the repository root.
 Reads <probs dir>/<run>/fold<k>.npz (idx, y, prob; written by repro/run_rgcn.py and followup/kg/tabular_mimic.py with
 --save_probs, see foldwise_runs.sh), pools the 10 test folds so each patient is predicted once, and for every class
 one-vs-rest computes

@@ -1,11 +1,10 @@
 """Does explicit event order or interval information add to event occurrence? Gradient boosting on the MIMIC-IV
 landmark tables, same 10 folds, model and metrics as the paper (exploratory follow-up to timing_mimic.py).
 
-Usage (from the repository root):
-  PYTHONPATH=repro python followup/kg/timing_order.py <dir with features_L{24,48,72}.parquet> <results dir>
-splits.py and tabular_baselines.py come from repro/, tabular_mimic.py from followup/kg/. Writes per-fold JSON and
-summary.json with aggregate metrics only; counts below 11 are suppressed. Paired comparisons use the corrected
-resampled t-test, as in corrected_stats.py.
+Usage: PYTHONPATH=repro python followup/kg/timing_order.py <dir with features_L{24,48,72}.parquet> <results dir>
+Run from the repository root. splits.py and tabular_baselines.py come from repro/, tabular_mimic.py from followup/kg/.
+Writes per-fold JSON and summary.json with aggregate metrics only; counts below 11 are suppressed. Paired comparisons
+use the corrected resampled t-test, as in corrected_stats.py.
 Feature sets (all derived from the first-time columns <event>_h, hours from admission, missing when the event did not
 occur before the landmark):
   EV_OCC        occurrence of the 11 events (reference)

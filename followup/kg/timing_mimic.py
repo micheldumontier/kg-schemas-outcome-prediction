@@ -1,11 +1,10 @@
 """Does event timing add to event occurrence? Gradient boosting on the MIMIC-IV landmark tables, same 10 folds as the paper.
 
-Usage (from the repository root):
-  PYTHONPATH=repro python followup/kg/timing_mimic.py <dir with features_L{24,48,72}.parquet> <results dir>
-splits.py and tabular_baselines.py come from repro/, tabular_mimic.py from followup/kg/. For each landmark it fits four
-feature sets (event occurrence only, occurrence and first times, all features without times, all features) and writes
-per-fold JSON (aggregate metrics only) plus summary.json with mean AUC, SD and paired t-tests over folds. The corrected
-resampled t-tests of these comparisons are in timing_order.py.
+Usage: PYTHONPATH=repro python followup/kg/timing_mimic.py <dir with features_L{24,48,72}.parquet> <results dir>
+Run from the repository root. splits.py and tabular_baselines.py come from repro/, tabular_mimic.py from followup/kg/.
+For each landmark it fits four feature sets (event occurrence only, occurrence and first times, all features without
+times, all features) and writes per-fold JSON (aggregate metrics only) plus summary.json with mean AUC, SD and paired
+t-tests over folds. The corrected resampled t-tests of these comparisons are in timing_order.py.
 """
 import json, sys
 from pathlib import Path

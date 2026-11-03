@@ -1,8 +1,8 @@
 """Summarise the fold-wise standardisation and calibration runs (aggregates only).
 
 Usage: python aggregate_foldwise.py <foldwise results dir> <paper mimic24 results dir> <output dir>
-e.g. from the repository root: python followup/kg/aggregate_foldwise.py ~/mimic-iv/derived/foldwise/results
-  ~/mimic-iv/derived/results followup/results/foldwise   (runs of foldwise_runs.sh and tabular_mimic.py --calibration)
+e.g. python followup/kg/aggregate_foldwise.py ~/mimic-iv/derived/foldwise/results ~/mimic-iv/derived/results
+  followup/results/foldwise, from the repository root, over the runs of foldwise_runs.sh and tabular_mimic.py.
 Copies the per-fold JSONs of the foldwise runs to <output dir>/<run>/ without pred_class_counts, then writes
 <output dir>/foldwise.md and foldwise.json: mean and SD over folds of weighted AUC, macro AUC, macro-F1, Brier and log
 loss per run, and Nadeau-Bengio corrected paired tests (see corrected_stats.py) of
