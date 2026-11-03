@@ -43,6 +43,9 @@ ap.add_argument('--both_directions', action='store_true', help='also pass messag
 ap.add_argument('--init_emb', default=None, help='npy [num_nodes, embed_dim]; non-zero rows replace the initial node embedding')
 ap.add_argument('--zero_emb_regex', default=None, help='entities whose name matches start with a zero embedding (e.g. patient-specific nodes)')
 ap.add_argument('--emb_std', type=float, default=None, help='diagnostic: init node embeddings N(0, std) instead of xavier (still untrained)')
+ap.add_argument('--foldwise_std', action='store_true', help='recompute literal features per fold from the training fold only (see foldstd.py)')
+ap.add_argument('--calibration', action='store_true', help='add Brier score, log loss and macro one-vs-rest AUC to each fold JSON')
+ap.add_argument('--save_probs', default=None, help='directory; write test indices, labels and predicted probabilities per fold to <dir>/<run>/fold<k>.npz (patient-level, never commit)')
 ap.add_argument('--run', required=True, help='run name; results go to <results_dir>/<run>/fold<k>.json')
 ap.add_argument('--results_dir', default='results')
 args = ap.parse_args()
@@ -57,11 +60,15 @@ entity = entity.to_dict()[0]
 patients = [entity[f'<http://nvasc.org/synth_patient_{i}>'] for i in range(args.num_patients)]
 
 triples = pd.read_csv(f'{args.prefix}_triples.tsv', sep='\t', header=None)
+triples_orig = triples.values.copy()      # original direction, for --foldwise_std
 triples_inv = triples[[2, 1, 0]]
 triples_inv.columns = [0, 1, 2]
 triples = triples_inv
 y = np.asarray(joblib.load(args.outcomes))
 num_x = torch.Tensor(np.load(f'{args.prefix}_numeric.npy'))
+if args.foldwise_std:
+    from foldstd import parse_literals, node_owner, foldwise_numeric
+    _lits, _owner = parse_literals(names), node_owner(names)
 
 edge_index = torch.vstack((torch.Tensor(triples[0].values).long(), torch.Tensor(triples[2].values).long()))
 edge_type = torch.Tensor(triples[1].values).long()
@@ -129,6 +136,10 @@ for fold, (tr_i, va_i, te_i) in enumerate(paper_splits(y)):
     torch.manual_seed(args.seed + fold); np.random.seed(args.seed + fold)
     tr, va, te = (torch.tensor(patients[i], device=device) for i in (tr_i, va_i, te_i))
     ytr, yva, yte = (torch.tensor(y[i], device=device) for i in (tr_i, va_i, te_i))
+    if args.foldwise_std:
+        _z, _cnt = foldwise_numeric(num_nodes, _lits, _owner, triples_orig, tr_i)
+        data.num_x = torch.tensor(_z, dtype=torch.float32, device=device).view(-1, 1)
+        print('foldwise_std training literals per datatype:', _cnt, flush=True)
     model = Net(args.layers).to(device)
     opt = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.wd)
     best_val, best_state, best_epoch = 0, None, 0
@@ -157,6 +168,12 @@ for fold, (tr_i, va_i, te_i) in enumerate(paper_splits(y)):
              f1_macro=precision_recall_fscore_support(yt, yp, average='macro', zero_division=0)[2],
              f1_weighted=precision_recall_fscore_support(yt, yp, average='weighted', zero_division=0)[2],
              pred_class_counts=np.bincount(yp, minlength=3).tolist())
+    if args.calibration:
+        from calibration import calibration_metrics
+        r.update(calibration_metrics(yt, prob))
+    if args.save_probs:
+        from calibration import save_probs
+        save_probs(args.save_probs, args.run, fold, te_i, yt, prob)
     tmp = path.with_suffix('.tmp')
     tmp.write_text(json.dumps(r, default=float))
     tmp.rename(path)          # atomic, so an interrupted fold never leaves a partial file
