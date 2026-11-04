@@ -62,3 +62,14 @@ def test_runner_loads_initial_embeddings_for_listed_rows(tmp_path):
     r = run(tmp_path, ['--run_folds', '1', '--init_emb', str(tmp_path / 'init.npy')])
     assert r.returncode == 0, r.stderr
     assert 'initial embeddings loaded for 1 nodes' in r.stdout
+
+
+def test_runner_foldwise_std_calibration_and_probabilities(tmp_path):
+    tiny_graph(tmp_path)
+    r = run(tmp_path, ['--run_folds', '1', '--foldwise_std', '--calibration', '--save_probs', str(tmp_path / 'probs')])
+    assert r.returncode == 0, r.stderr
+    assert 'foldwise_std training literals per datatype' in r.stdout
+    rec = json.loads((tmp_path / 'res' / 'T' / 'fold0.json').read_text())
+    assert {'brier', 'log_loss', 'auc_macro'} <= set(rec)
+    z = np.load(tmp_path / 'probs' / 'T' / 'fold0.npz')
+    assert z['prob'].shape == (len(z['idx']), 3) and np.allclose(z['prob'].sum(1), 1, atol=1e-5)

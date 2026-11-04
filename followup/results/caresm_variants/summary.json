@@ -1,0 +1,649 @@
+{
+ "metric": "auc_weighted",
+ "folds": 10,
+ "runs": [
+  {
+   "run": "MIMIC24_caresm_a_L3",
+   "variant": "A",
+   "layers": 3,
+   "seeds": [
+    0
+   ],
+   "folds": 10,
+   "auc_mean": 0.5129155664441214,
+   "auc_sd": 0.02636517669087864
+  },
+  {
+   "run": "MIMIC24s1_caresm_a_L3",
+   "variant": "A",
+   "layers": 3,
+   "seeds": [
+    1
+   ],
+   "folds": 10,
+   "auc_mean": 0.49111496881405214,
+   "auc_sd": 0.023409446965773406
+  },
+  {
+   "run": "MIMIC24s2_caresm_a_L3",
+   "variant": "A",
+   "layers": 3,
+   "seeds": [
+    2
+   ],
+   "folds": 10,
+   "auc_mean": 0.49810323490870906,
+   "auc_sd": 0.0363968771221195
+  },
+  {
+   "run": "caresm_a_L3 (mean of seeds 0,1,2)",
+   "variant": "A",
+   "layers": 3,
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "folds": 10,
+   "auc_mean": 0.5007112567222942,
+   "auc_sd": 0.022787162607399093
+  },
+  {
+   "run": "MIMIC24_caresm_sio_L3",
+   "variant": "B",
+   "layers": 3,
+   "seeds": [
+    0
+   ],
+   "folds": 10,
+   "auc_mean": 0.8001185095159821,
+   "auc_sd": 0.031224629881777953
+  },
+  {
+   "run": "MIMIC24s1_caresm_sio_L3",
+   "variant": "B",
+   "layers": 3,
+   "seeds": [
+    1
+   ],
+   "folds": 10,
+   "auc_mean": 0.8079342475754224,
+   "auc_sd": 0.03166854040533513
+  },
+  {
+   "run": "MIMIC24s2_caresm_sio_L3",
+   "variant": "B",
+   "layers": 3,
+   "seeds": [
+    2
+   ],
+   "folds": 10,
+   "auc_mean": 0.7935856641162288,
+   "auc_sd": 0.0406953940079682
+  },
+  {
+   "run": "caresm_sio_L3 (mean of seeds 0,1,2)",
+   "variant": "B",
+   "layers": 3,
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "folds": 10,
+   "auc_mean": 0.8005461404025445,
+   "auc_sd": 0.033111943805552296
+  },
+  {
+   "run": "MIMIC24_caresm_feat_L3",
+   "variant": "C",
+   "layers": 3,
+   "seeds": [
+    0
+   ],
+   "folds": 10,
+   "auc_mean": 0.8066945967651268,
+   "auc_sd": 0.034737812187743765
+  },
+  {
+   "run": "MIMIC24s1_caresm_feat_L3",
+   "variant": "C",
+   "layers": 3,
+   "seeds": [
+    1
+   ],
+   "folds": 10,
+   "auc_mean": 0.8125768314000729,
+   "auc_sd": 0.0322574272701696
+  },
+  {
+   "run": "MIMIC24s2_caresm_feat_L3",
+   "variant": "C",
+   "layers": 3,
+   "seeds": [
+    2
+   ],
+   "folds": 10,
+   "auc_mean": 0.8105204527415294,
+   "auc_sd": 0.031121875933129022
+  },
+  {
+   "run": "caresm_feat_L3 (mean of seeds 0,1,2)",
+   "variant": "C",
+   "layers": 3,
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "folds": 10,
+   "auc_mean": 0.8099306269689096,
+   "auc_sd": 0.030956142558771573
+  },
+  {
+   "run": "MIMIC24_caresm_sio_part_L3",
+   "variant": "D",
+   "layers": 3,
+   "seeds": [
+    0
+   ],
+   "folds": 10,
+   "auc_mean": 0.7981332869445464,
+   "auc_sd": 0.03344649720255368
+  },
+  {
+   "run": "MIMIC24s1_caresm_sio_part_L3",
+   "variant": "D",
+   "layers": 3,
+   "seeds": [
+    1
+   ],
+   "folds": 10,
+   "auc_mean": 0.8072511297656269,
+   "auc_sd": 0.030340978604178847
+  },
+  {
+   "run": "MIMIC24s2_caresm_sio_part_L3",
+   "variant": "D",
+   "layers": 3,
+   "seeds": [
+    2
+   ],
+   "folds": 10,
+   "auc_mean": 0.8002551040571928,
+   "auc_sd": 0.03559091873936024
+  },
+  {
+   "run": "caresm_sio_part_L3 (mean of seeds 0,1,2)",
+   "variant": "D",
+   "layers": 3,
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "folds": 10,
+   "auc_mean": 0.8018798402557887,
+   "auc_sd": 0.03267355298943682
+  },
+  {
+   "run": "MIMIC24_caresm_a_L4",
+   "variant": "A",
+   "layers": 4,
+   "seeds": [
+    0
+   ],
+   "folds": 10,
+   "auc_mean": 0.8101290042286177,
+   "auc_sd": 0.031473484118723666
+  },
+  {
+   "run": "MIMIC24s1_caresm_a_L4",
+   "variant": "A",
+   "layers": 4,
+   "seeds": [
+    1
+   ],
+   "folds": 10,
+   "auc_mean": 0.8111656714977041,
+   "auc_sd": 0.03166269345189684
+  },
+  {
+   "run": "MIMIC24s2_caresm_a_L4",
+   "variant": "A",
+   "layers": 4,
+   "seeds": [
+    2
+   ],
+   "folds": 10,
+   "auc_mean": 0.8180277076944573,
+   "auc_sd": 0.026897781906935175
+  },
+  {
+   "run": "caresm_a_L4 (mean of seeds 0,1,2)",
+   "variant": "A",
+   "layers": 4,
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "folds": 10,
+   "auc_mean": 0.8131074611402598,
+   "auc_sd": 0.02928552844695604
+  },
+  {
+   "run": "MIMIC24_caresm_sio_L4",
+   "variant": "B",
+   "layers": 4,
+   "seeds": [
+    0
+   ],
+   "folds": 10,
+   "auc_mean": 0.8122504913476435,
+   "auc_sd": 0.028918397326873832
+  },
+  {
+   "run": "MIMIC24s1_caresm_sio_L4",
+   "variant": "B",
+   "layers": 4,
+   "seeds": [
+    1
+   ],
+   "folds": 10,
+   "auc_mean": 0.8105305980562335,
+   "auc_sd": 0.034082346704476726
+  },
+  {
+   "run": "MIMIC24s2_caresm_sio_L4",
+   "variant": "B",
+   "layers": 4,
+   "seeds": [
+    2
+   ],
+   "folds": 10,
+   "auc_mean": 0.8180980851561717,
+   "auc_sd": 0.024419286609793176
+  },
+  {
+   "run": "caresm_sio_L4 (mean of seeds 0,1,2)",
+   "variant": "B",
+   "layers": 4,
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "folds": 10,
+   "auc_mean": 0.8136263915200163,
+   "auc_sd": 0.027711600379462485
+  },
+  {
+   "run": "MIMIC24_caresm_feat_L4",
+   "variant": "C",
+   "layers": 4,
+   "seeds": [
+    0
+   ],
+   "folds": 10,
+   "auc_mean": 0.8070574898282261,
+   "auc_sd": 0.02514131626579118
+  },
+  {
+   "run": "MIMIC24s1_caresm_feat_L4",
+   "variant": "C",
+   "layers": 4,
+   "seeds": [
+    1
+   ],
+   "folds": 10,
+   "auc_mean": 0.807124006207253,
+   "auc_sd": 0.02630822031058702
+  },
+  {
+   "run": "MIMIC24s2_caresm_feat_L4",
+   "variant": "C",
+   "layers": 4,
+   "seeds": [
+    2
+   ],
+   "folds": 10,
+   "auc_mean": 0.8094863630771897,
+   "auc_sd": 0.027906047226731564
+  },
+  {
+   "run": "caresm_feat_L4 (mean of seeds 0,1,2)",
+   "variant": "C",
+   "layers": 4,
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "folds": 10,
+   "auc_mean": 0.8078892863708896,
+   "auc_sd": 0.025207842862400028
+  },
+  {
+   "run": "MIMIC24_caresm_sio_part_L4",
+   "variant": "D",
+   "layers": 4,
+   "seeds": [
+    0
+   ],
+   "folds": 10,
+   "auc_mean": 0.7976937364417376,
+   "auc_sd": 0.030000901425568147
+  },
+  {
+   "run": "MIMIC24s1_caresm_sio_part_L4",
+   "variant": "D",
+   "layers": 4,
+   "seeds": [
+    1
+   ],
+   "folds": 10,
+   "auc_mean": 0.8092565128631428,
+   "auc_sd": 0.025615266178184482
+  },
+  {
+   "run": "MIMIC24s2_caresm_sio_part_L4",
+   "variant": "D",
+   "layers": 4,
+   "seeds": [
+    2
+   ],
+   "folds": 10,
+   "auc_mean": 0.8030577350431771,
+   "auc_sd": 0.036416260076495226
+  },
+  {
+   "run": "caresm_sio_part_L4 (mean of seeds 0,1,2)",
+   "variant": "D",
+   "layers": 4,
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "folds": 10,
+   "auc_mean": 0.8033359947826858,
+   "auc_sd": 0.029299317328511106
+  },
+  {
+   "run": "MIMIC24_caresm_ts",
+   "variant": "CARE-SM (MIE)",
+   "layers": 4,
+   "seeds": [
+    0
+   ],
+   "folds": 10,
+   "auc_mean": 0.8079902794315078,
+   "auc_sd": 0.031762824779136584
+  },
+  {
+   "run": "MIMIC24s1_caresm_ts",
+   "variant": "CARE-SM (MIE)",
+   "layers": 4,
+   "seeds": [
+    1
+   ],
+   "folds": 10,
+   "auc_mean": 0.8142293923809067,
+   "auc_sd": 0.029479933411472963
+  },
+  {
+   "run": "MIMIC24s2_caresm_ts",
+   "variant": "CARE-SM (MIE)",
+   "layers": 4,
+   "seeds": [
+    2
+   ],
+   "folds": 10,
+   "auc_mean": 0.813696397607494,
+   "auc_sd": 0.040716815479531016
+  },
+  {
+   "run": "caresm_ts (mean of seeds 0,1,2)",
+   "variant": "CARE-SM (MIE)",
+   "layers": 4,
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "folds": 10,
+   "auc_mean": 0.8119720231399693,
+   "auc_sd": 0.03106706715540853
+  },
+  {
+   "run": "MIMIC24_caresm_comp",
+   "variant": "compiled CARE-SM (MIE)",
+   "layers": 3,
+   "seeds": [
+    0
+   ],
+   "folds": 10,
+   "auc_mean": 0.8046781032591109,
+   "auc_sd": 0.03045810869893847
+  },
+  {
+   "run": "MIMIC24s1_caresm_comp",
+   "variant": "compiled CARE-SM (MIE)",
+   "layers": 3,
+   "seeds": [
+    1
+   ],
+   "folds": 10,
+   "auc_mean": 0.8056902276092155,
+   "auc_sd": 0.03808937006705109
+  },
+  {
+   "run": "MIMIC24s2_caresm_comp",
+   "variant": "compiled CARE-SM (MIE)",
+   "layers": 3,
+   "seeds": [
+    2
+   ],
+   "folds": 10,
+   "auc_mean": 0.8086954012335589,
+   "auc_sd": 0.02671974323867849
+  },
+  {
+   "run": "caresm_comp (mean of seeds 0,1,2)",
+   "variant": "compiled CARE-SM (MIE)",
+   "layers": 3,
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "folds": 10,
+   "auc_mean": 0.8063545773672951,
+   "auc_sd": 0.02937020863015056
+  }
+ ],
+ "pairs": [
+  {
+   "comparison": "caresm_sio_L3 vs caresm_a_L3",
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "mean_a": 0.8005461404025445,
+   "mean_b": 0.5007112567222942,
+   "diff": 0.29983488368025013,
+   "p": 3.093220872044786e-09
+  },
+  {
+   "comparison": "caresm_feat_L3 vs caresm_a_L3",
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "mean_a": 0.8099306269689096,
+   "mean_b": 0.5007112567222942,
+   "diff": 0.30921937024661544,
+   "p": 2.3015431368724647e-09
+  },
+  {
+   "comparison": "caresm_feat_L3 vs caresm_sio_L3",
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "mean_a": 0.8099306269689096,
+   "mean_b": 0.8005461404025445,
+   "diff": 0.009384486566365313,
+   "p": 0.11005197999565741
+  },
+  {
+   "comparison": "caresm_sio_part_L3 vs caresm_sio_L3",
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "mean_a": 0.8018798402557887,
+   "mean_b": 0.8005461404025445,
+   "diff": 0.001333699853244341,
+   "p": 0.8330995972876789
+  },
+  {
+   "comparison": "caresm_sio_L4 vs caresm_a_L4",
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "mean_a": 0.8136263915200163,
+   "mean_b": 0.8131074611402598,
+   "diff": 0.000518930379756477,
+   "p": 0.8866936728000543
+  },
+  {
+   "comparison": "caresm_feat_L4 vs caresm_a_L4",
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "mean_a": 0.8078892863708896,
+   "mean_b": 0.8131074611402598,
+   "diff": -0.005218174769370154,
+   "p": 0.44839668522159537
+  },
+  {
+   "comparison": "caresm_feat_L4 vs caresm_sio_L4",
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "mean_a": 0.8078892863708896,
+   "mean_b": 0.8136263915200163,
+   "diff": -0.005737105149126631,
+   "p": 0.30010240092782303
+  },
+  {
+   "comparison": "caresm_sio_part_L4 vs caresm_sio_L4",
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "mean_a": 0.8033359947826858,
+   "mean_b": 0.8136263915200163,
+   "diff": -0.010290396737330464,
+   "p": 0.05567870748872555
+  },
+  {
+   "comparison": "caresm_a_L3 vs caresm_a_L4",
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "mean_a": 0.5007112567222942,
+   "mean_b": 0.8131074611402598,
+   "diff": -0.3123962044179655,
+   "p": 2.2658607635228737e-09
+  },
+  {
+   "comparison": "caresm_sio_L3 vs caresm_sio_L4",
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "mean_a": 0.8005461404025445,
+   "mean_b": 0.8136263915200163,
+   "diff": -0.013080251117471898,
+   "p": 0.005549824819360623
+  },
+  {
+   "comparison": "caresm_feat_L3 vs caresm_feat_L4",
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "mean_a": 0.8099306269689096,
+   "mean_b": 0.8078892863708896,
+   "diff": 0.002041340598020047,
+   "p": 0.5968746067517379
+  },
+  {
+   "comparison": "caresm_sio_part_L3 vs caresm_sio_part_L4",
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "mean_a": 0.8018798402557887,
+   "mean_b": 0.8033359947826858,
+   "diff": -0.001456154526897091,
+   "p": 0.4973675275864822
+  },
+  {
+   "comparison": "caresm_comp vs caresm_ts",
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "mean_a": 0.8063545773672951,
+   "mean_b": 0.8119720231399693,
+   "diff": -0.005617445772674446,
+   "p": 0.4855001473204435
+  },
+  {
+   "comparison": "caresm_a_L4 vs caresm_ts",
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "mean_a": 0.8131074611402598,
+   "mean_b": 0.8119720231399693,
+   "diff": 0.0011354380002902564,
+   "p": 0.5608431101052285
+  },
+  {
+   "comparison": "caresm_feat_L3 vs caresm_comp",
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "mean_a": 0.8099306269689096,
+   "mean_b": 0.8063545773672951,
+   "diff": 0.003576049601614595,
+   "p": 0.450658035648171
+  }
+ ],
+ "incomplete": []
+}

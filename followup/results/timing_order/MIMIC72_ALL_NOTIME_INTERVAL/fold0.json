@@ -1,0 +1,1 @@
+{"run": "MIMIC72_ALL_NOTIME_INTERVAL", "fold": 0, "best_epoch": 0, "acc": 0.6974789915966386, "auc_weighted": 0.875587926152172, "f1_backhome": 0.7524752475247525, "f1_rehab": 0.7169811320754716, "f1_death": 0.45161290322580644, "f1_macro": 0.640356427608677, "f1_weighted": 0.6889283689949829}

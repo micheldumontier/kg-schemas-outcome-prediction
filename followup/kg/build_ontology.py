@@ -3,7 +3,7 @@
 Usage: python build_ontology.py <sphn_rdf_schema.ttl> <out.owl>
 Merges the SPHN RDF Schema 2026.1 with OWL classes for every code used in the real-SPHN graphs: ATC and ICD-10-PCS codes
 with their ancestors (rdfs:subClassOf the direct parent), LOINC laboratory codes and SNOMED CT concepts, each with its
-rdfs:label. The schema's owl:imports are dropped. Writes RDF/XML, which OWL2Vec* (through owlready2) can load.
+rdfs:label. The schema's owl:imports are dropped. Writes plain RDF/XML (the 'pretty' serialiser adds triples depending on hash order), which OWL2Vec* (through owlready2) can load.
 """
 import sys
 import rdflib
@@ -45,5 +45,5 @@ def assemble(schema_path):
 
 if __name__ == '__main__':
     g = assemble(sys.argv[1])
-    g.serialize(sys.argv[2], format='pretty-xml')
+    g.serialize(sys.argv[2], format='xml')
     print(f'wrote {sys.argv[2]} with {len(g)} triples and {len(code_classes())} code classes')

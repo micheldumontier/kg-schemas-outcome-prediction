@@ -1,0 +1,1 @@
+{"run": "ANEU24_GBM", "fold": 1, "best_epoch": 0, "auc_weighted": 0.7885305483989694, "f1_macro": 0.49936868686868685}

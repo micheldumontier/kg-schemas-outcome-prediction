@@ -39,10 +39,15 @@ protocol) supersede its numbers. Two single-fold results changed materially and 
   the dropped literals rather than from depth.
 
 **Real data.** The follow-up on MIMIC-IV (1,388 patients with subarachnoid haemorrhage at a 24-hour landmark, 1,287 at
-48 hours and 1,190 at 72 hours) is in `followup/` and in the MIE 2027 manuscript. In short, CARE-SM and SPHN graphs
+48 hours and 1,190 at 72 hours) is in `followup/` and in the MIE 2027 paper. In short, CARE-SM and SPHN graphs
 performed similarly with a small, consistent CARE-SM advantage; gradient boosting matched the best graphs; a graph with
-released SPHN 2026.1 terms matched gradient boosting; and SapBERT label embeddings did not help. Per-fold metrics are in
-`followup/results/mimic24/`.
+released SPHN 2026.1 terms matched gradient boosting at all three landmarks; and label, ontology and hierarchy
+enrichments did not help. With the corrected resampled t-test no graph differed significantly from gradient boosting or
+from another schema. At three layers CARE-SM reached values only through attribute shortcuts, event timing added
+nothing beyond occurrence, fold-wise standardisation of literals changed graph AUC by at most 0.006, CARE-SM was well
+calibrated, and in the aneurysm-repair cohort the graphs lost AUC while the tabular models held theirs. Per-fold metrics are
+in `followup/results/mimic24/` and the other folders of `followup/results/`, and the table "Where each result of the
+MIE 2027 paper comes from" in the top-level `README.md` maps each result to its script and results folder.
 
 ## 1. Which data the published graphs were built from
 

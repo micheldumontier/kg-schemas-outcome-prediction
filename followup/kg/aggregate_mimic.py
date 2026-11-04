@@ -20,7 +20,7 @@ PAIRS = [('caresm_ts', 'sphn_ts', 'CAREvsSPHN'), ('caresm_comp', 'caresm_ts', 'C
 
 GRAPH = {k: v for k, v in RUNS.items() if k in ('caresm_ts', 'caresm_comp', 'sphn_ts', 'sphn_tsr')}
 # prefix, macro tag, runs, pairs
-LANDMARK_RUNS = {**GRAPH, 'GBM': 'GBM', 'LR': 'LR', 'EVENTS_GBM': 'Events', 'AGE_GBM': 'Age'}
+LANDMARK_RUNS = {**GRAPH, 'GBM': 'GBM', 'LR': 'LR', 'EVENTS_GBM': 'Events', 'AGE_GBM': 'Age', 'sphn_real': 'SPHNreal'}
 ROBUSTNESS = [('MIMIC48', 'Hfortyeight', LANDMARK_RUNS, PAIRS[:5]),
               ('MIMIC72', 'Hseventytwo', LANDMARK_RUNS, PAIRS[:5]),
               ('MIMIC24s1', 'Sone', GRAPH, PAIRS[:3]),

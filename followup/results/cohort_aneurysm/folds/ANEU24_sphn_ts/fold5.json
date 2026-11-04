@@ -1,0 +1,1 @@
+{"run": "ANEU24_sphn_ts", "fold": 5, "best_epoch": 33, "auc_weighted": 0.7916341923318667, "f1_macro": 0.4551282051282051}

@@ -20,7 +20,7 @@ def test_every_code_class_has_a_label_and_parents_are_classes_too():
 @pytest.mark.skipif(not SCHEMA.exists(), reason='SPHN 2026.1 schema not fetched (ontologies/fetch_sphn.sh)')
 def test_assembled_ontology_round_trips_as_rdf_xml(tmp_path):
     g = assemble(SCHEMA)
-    g.serialize(tmp_path / 'o.owl', format='pretty-xml')
+    g.serialize(tmp_path / 'o.owl', format='xml')
     h = rdflib.Graph().parse(tmp_path / 'o.owl', format='xml')
     assert len(h) == len(g)
     assert (rdflib.URIRef(ATC + 'C08CA06'), RDFS.subClassOf, rdflib.URIRef(ATC + 'C08CA')) in h
