@@ -7,7 +7,7 @@ The original study compared SPHN and CARE-SM knowledge graphs of synthetic patie
 ## Main findings
 
 **Synthetic data** (10-fold cross-validation, the original protocol)
-- The published results reproduce, with SPHN at AUC 0.910 and CARE-SM at 0.502.
+- The published results reproduce, with SPHN at AUC 0.910 and CARE-SM at 0.502, both with the repository's scripts and with the authors' own training notebooks (`repro/results/notebook/`).
 - The tabular baselines in the original study were run on a different synthetic table. On the table the graphs were built from, logistic regression reaches 0.918, level with the graph model.
 - The CARE-SM result comes from pipeline defects. The preprocessing dropped all numeric values, and every feature lay four hops from the patient while the model reached three. With both corrected, CARE-SM reaches 0.821, and 0.889 with node embeddings at a usable scale.
 - Age alone predicts the synthetic outcome (0.914), and the synthetic care pathways carry no outcome signal by construction, so the time encodings could not differ.
@@ -48,7 +48,7 @@ Paths are relative to the repository root. Every results folder holds aggregate 
 
 | Path | What it holds |
 |---|---|
-| `repro/` | Reproduction of the synthetic-data pipeline. `gen_caresm.py` and `preprocess_caresm.py` are ports of the original notebooks, with every change marked `CHANGED` and the literal fix behind `--fix_literals`. `run_rgcn.py` is the original R-GCN with literal encoder, generalised to any depth and resumable per fold. Also tabular baselines, diagnostics (`diag_hops.py`, `caresm_roundtrip.py`), the run registry (`runs.py`) and aggregation. |
+| `repro/` | Reproduction of the synthetic-data pipeline. `gen_caresm.py` and `preprocess_caresm.py` are ports of the original notebooks, with every change marked `CHANGED` and the literal fix behind `--fix_literals`. `run_rgcn.py` is the original R-GCN with literal encoder, generalised to any depth and resumable per fold. `run_notebook_caresm.py` and `run_notebook_sphn.py` are marked ports of the authors' CARE-SM and SPHN training notebooks. Also tabular baselines, diagnostics (`diag_hops.py`, `caresm_roundtrip.py`), the run registry (`runs.py`) and aggregation. |
 | `repro/results/` | Per-fold metrics for every synthetic run. |
 | `followup/mimic/` | MIMIC-IV v3.1 conversion from a PostgreSQL dump to Parquet without a database server (`dump_to_parquet.py`), the cohort definition (`cohort.sql`), landmark features (`landmark.py`, `build_features.py`) and an aggregate-only cohort report that suppresses counts below 11. |
 | `followup/kg/` | SPHN, CARE-SM and compiled CARE-SM graph construction with pre-training checks (`build_graphs.py`), the matched CARE-SM variants (`caresm_variants.py`), the released-SPHN graph (`build_sphn_real.py`), terminology mappings and hierarchies (`terminology.py`, `omop_ancestors.py`), label and ontology embeddings (`embed_labels.py`, `owl2vec_embed.py`, `build_ontology.py`), timing analyses (`timing_mimic.py`, `timing_order.py`), the aneurysm-repair subset (`make_aneurysm_subset.py`), calibration (`calibration_slopes.py`), corrected tests (`corrected_stats.py`), run queues and aggregation. |
