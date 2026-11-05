@@ -140,6 +140,10 @@ The failures are in how the graph is turned into model input and in the model's 
   fixed and 4 layers the notebook's settings give 0.822 ± 0.008 (NB_E; audit run E 0.809 on fold 0), and with
   N(0, 1) node embeddings 0.886 ± 0.006 (NB_F; audit run F 0.882 on fold 0). Per-fold files are in
   `results/notebook/`. The notebook does not seed torch, so these runs are not bit-reproducible.
+- The authors' SPHN training notebook (`notebooks/Graphs/rgcn_node_pred.ipynb`, ported as `run_notebook_sphn.py`)
+  differs from the CARE-SM one only in its paths and its embedding size of 32. With its own settings (fold seed 42,
+  3 layers, 2,000 epochs, 10 folds) the SPHN graph with timestamps gives AUC 0.910 ± 0.007 (NB_S, 4 November 2026),
+  the same as the repository's scripts (S, 0.910 ± 0.007) and the paper's 0.91.
 - Training is fragile: with untrained, near-zero node embeddings, even a direct label edge takes ~130–260 epochs to be
   noticed (D/D2 sit at chance until then), so conclusions drawn from a fixed epoch budget can hinge on optimisation.
 
@@ -147,6 +151,7 @@ The failures are in how the graph is turned into model input and in the model's 
 
 - `gen_caresm.py`, `preprocess_caresm.py` — verbatim notebook ports (changes marked `CHANGED`; `--fix_literals` opt-in)
 - `run_rgcn.py` — repo RGCN+lit, generalised to L layers; `--emb_std` diagnostic
+- `run_notebook_caresm.py`, `run_notebook_sphn.py` — marked ports of the authors' CARE-SM and SPHN training notebooks
 - `diag_hops.py`, `caresm_roundtrip.py`, `tabular_same_split.py` — diagnostics
 - `results/*.json`, `logs/*.log`
 
